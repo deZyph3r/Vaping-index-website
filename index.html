@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Dangers of Vaping</title>
+  <title>Dangers of Vaping</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -15,70 +15,88 @@
         <ul>
           <li><a href="#about">What is Vaping?</a></li>
           <li><a href="#effects">Health Risks</a></li>
-          <li><a href="#teens">Teens & Vaping</a></li>
-          <li><a href="#stats">Statistics</a></li>
-          <li><a href="#help">Resources</a></li>
+          <li><a href="#teens">Teen Risk</a></li>
+          <li><a href="#stats">Stats</a></li>
+          <li><a href="#quiz">Quiz</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   <main>
-    <section id="about" class="section">
+    <section id="about" class="section fade-in">
       <div class="container">
         <h2>What is Vaping?</h2>
-        <p>Vaping is the act of inhaling a vapor created by an electronic cigarette or other device. The vapor usually contains nicotine, flavoring, and other harmful chemicals. It was originally designed to help adults quit smoking, but it's now become a growing problem among teens.</p>
+        <p>Vaping is the act of inhaling a vapor created by an electronic device. These devices heat a liquid—often flavored and with nicotine. Many think it's safer than smoking, but it's not risk-free.</p>
       </div>
     </section>
 
-    <section id="effects" class="section bg-light">
+    <section id="effects" class="section bg-light fade-in">
       <div class="container">
         <h2>Health Risks</h2>
         <ul>
-          <li><strong>Nicotine Addiction:</strong> Most vapes contain nicotine—a highly addictive substance that affects memory and brain development in teens.</li>
-          <li><strong>Lung Injuries:</strong> Vaping has been linked to serious lung disease and breathing issues.</li>
-          <li><strong>Heart Problems:</strong> E-cigarettes can raise your heart rate and blood pressure, increasing your risk of heart attack.</li>
-          <li><strong>Chemical Exposure:</strong> Vape aerosols contain harmful substances like formaldehyde and heavy metals.</li>
+          <li><strong>Brain Damage:</strong> Nicotine harms memory, focus, and mood in teens.</li>
+          <li><strong>Lung Illness:</strong> Vaping linked to EVALI — a serious lung disease.</li>
+          <li><strong>Heart Strain:</strong> Nicotine increases heart rate and blood pressure.</li>
         </ul>
       </div>
     </section>
 
-    <section id="teens" class="section">
+    <section id="teens" class="section fade-in">
       <div class="container">
         <h2>Why Teens Are at Risk</h2>
-        <p>Teen brains are still developing, making them more vulnerable to addiction. Vaping affects attention, learning, and mental health. Peer pressure, cool flavors, and misleading ads make vaping appealing—but the consequences are serious and long-lasting.</p>
+        <p>The brain isn’t fully developed until age 25. Nicotine affects learning, attention, and may cause anxiety and depression. Teens are more likely to get addicted quickly.</p>
       </div>
     </section>
 
-    <section id="stats" class="section bg-dark">
+    <section id="stats" class="section bg-dark fade-in">
       <div class="container">
-        <h2>Vaping Statistics</h2>
-        <ul>
-          <li>Over <strong>2.5 million U.S. students</strong> currently use e-cigarettes (CDC, 2022).</li>
-          <li><strong>85% of teen vapers</strong> use flavored products.</li>
-          <li>Nicotine exposure in teens increases risk of future addiction.</li>
-          <li>More than <strong>1 in 5 high school students</strong> vape regularly.</li>
+        <h2>Statistics <button onclick="toggleStats()" class="toggle-btn">Toggle</button></h2>
+        <ul id="stats-list">
+          <li>🧠 Over <strong>2.5 million teens</strong> vape in the U.S. (CDC, 2022)</li>
+          <li>🔥 85% of vapes used by teens are flavored</li>
+          <li>📉 Vaping doubles the risk of trying cigarettes</li>
+          <li>💔 Teens who vape are 5x more likely to start smoking</li>
         </ul>
       </div>
     </section>
 
-    <section id="help" class="section">
+    <section id="quiz" class="section fade-in">
       <div class="container">
-        <h2>Help & Resources</h2>
-        <p>If you or someone you know wants to stop vaping, you're not alone. These tools and people can help:</p>
-        <ul>
-          <li><a href="https://teen.smokefree.gov" target="_blank">teen.smokefree.gov</a> — Tools and quitting support</li>
-          <li><a href="https://truthinitiative.org" target="_blank">Truth Initiative</a> — Campaigns and facts for teens</li>
-          <li>Talk to a trusted adult, teacher, or doctor for advice and help</li>
-        </ul>
+        <h2>Quick Quiz</h2>
+        <p>Test what you've learned about vaping:</p>
+
+        <div class="quiz-question">
+          <p><strong>1. What chemical in vapes causes addiction?</strong></p>
+          <button onclick="checkAnswer(this, true)">Nicotine ✅</button>
+          <button onclick="checkAnswer(this, false)">Water</button>
+          <button onclick="checkAnswer(this, false)">Sugar</button>
+        </div>
+
+        <div class="quiz-question">
+          <p><strong>2. Can vaping cause lung damage?</strong></p>
+          <button onclick="checkAnswer(this, true)">Yes ✅</button>
+          <button onclick="checkAnswer(this, false)">No</button>
+        </div>
+
+        <div class="quiz-question">
+          <p><strong>3. What age is the brain fully developed?</strong></p>
+          <button onclick="checkAnswer(this, false)">18</button>
+          <button onclick="checkAnswer(this, true)">25 ✅</button>
+          <button onclick="checkAnswer(this, false)">13</button>
+        </div>
+
+        <p id="quiz-result"></p>
       </div>
     </section>
   </main>
 
   <footer>
     <div class="container">
-      <p>© 2025 School Project by Ruben de Lange Bellville High School. Say NO to Vaping. 🚭</p>
+      <p>🚭 Say NO to Vaping | Grade 9 Project by [Your Name]</p>
     </div>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
