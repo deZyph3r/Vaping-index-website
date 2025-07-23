@@ -1,102 +1,580 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dangers of Vaping</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaping: The Hidden Dangers - A SA Youth Guide</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom CSS for animations and specific styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff; /* White background */
+            color: #1a1a1a; /* Near black text */
+            line-height: 1.6;
+        }
+
+        /* Hero section animation */
+        .hero-text-fade-in {
+            opacity: 0;
+            animation: fadeIn 1.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Section reveal animation (simulated with initial hidden state) */
+        .section-hidden {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .section-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Pulse animation for buttons */
+        .btn-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Quiz specific styles */
+        .quiz-option {
+            transition: background-color 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            background-color: #f0f0f0; /* Light gray on hover */
+        }
+
+        .quiz-option.selected {
+            background-color: #ffebeb; /* Very light red when selected */
+            border-color: #ef4444; /* Red border */
+        }
+
+        .quiz-option.correct {
+            background-color: #d1fae5; /* Light green for correct */
+            border-color: #10b981; /* Green border */
+        }
+
+        .quiz-option.incorrect {
+            background-color: #fee2e2; /* Light red for incorrect */
+            border-color: #ef4444; /* Red border */
+        }
+
+        /* Scroll-to-top button */
+        #scrollToTopBtn {
+            display: none; /* Hidden by default */
+            position: fixed; /* Fixed position */
+            bottom: 20px; /* Place at the bottom */
+            right: 20px; /* Place at the right */
+            z-index: 99; /* Ensure it's above other content */
+            border: none; /* Remove borders */
+            outline: none; /* Remove outline */
+            background-color: #ef4444; /* Red background */
+            color: white; /* White text */
+            cursor: pointer; /* Add a mouse pointer on hover */
+            padding: 15px; /* Some padding */
+            border-radius: 50%; /* Rounded corners */
+            font-size: 18px; /* Increase font size */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        #scrollToTopBtn:hover {
+            background-color: #dc2626; /* Darker red on hover */
+        }
+    </style>
 </head>
-<body>
-  <header>
-    <div class="container">
-      <h1>The Dangers of Vaping</h1>
-      <p class="tagline">Protect Your Health. Know the Facts.</p>
-      <nav>
-        <ul>
-          <li><a href="#about">What is Vaping?</a></li>
-          <li><a href="#effects">Health Risks</a></li>
-          <li><a href="#teens">Teen Risk</a></li>
-          <li><a href="#stats">Stats</a></li>
-          <li><a href="#quiz">Quiz</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+<body class="antialiased">
+    <!-- Scroll-to-top Button -->
+    <button id="scrollToTopBtn" title="Go to top">↑</button>
 
-  <main>
-    <section id="about" class="section fade-in">
-      <div class="container">
-        <h2>What is Vaping?</h2>
-        <p>Vaping is the act of inhaling a vapor created by an electronic device. These devices heat a liquid—often flavored and with nicotine. Many think it's safer than smoking, but it's not risk-free.</p>
-      </div>
-    </section>
-
-    <section id="effects" class="section bg-light fade-in">
-      <div class="container">
-        <h2>Health Risks</h2>
-        <ul>
-          <li><strong>Brain Damage:</strong> Nicotine harms memory, focus, and mood in teens.</li>
-          <li><strong>Lung Illness:</strong> Vaping linked to EVALI — a serious lung disease.</li>
-          <li><strong>Heart Strain:</strong> Nicotine increases heart rate and blood pressure.</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="teens" class="section fade-in">
-      <div class="container">
-        <h2>Why Teens Are at Risk</h2>
-        <p>The brain isn’t fully developed until age 25. Nicotine affects learning, attention, and may cause anxiety and depression. Teens are more likely to get addicted quickly.</p>
-      </div>
-    </section>
-
-    <section id="stats" class="section bg-dark fade-in">
-      <div class="container">
-        <h2>Statistics <button onclick="toggleStats()" class="toggle-btn">Toggle</button></h2>
-        <ul id="stats-list">
-          <li>🧠 Over <strong>2.5 million teens</strong> vape in the U.S. (CDC, 2022)</li>
-          <li>🔥 85% of vapes used by teens are flavored</li>
-          <li>📉 Vaping doubles the risk of trying cigarettes</li>
-          <li>💔 Teens who vape are 5x more likely to start smoking</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="quiz" class="section fade-in">
-      <div class="container">
-        <h2>Quick Quiz</h2>
-        <p>Test what you've learned about vaping:</p>
-
-        <div class="quiz-question">
-          <p><strong>1. What chemical in vapes causes addiction?</strong></p>
-          <button onclick="checkAnswer(this, true)">Nicotine ✅</button>
-          <button onclick="checkAnswer(this, false)">Water</button>
-          <button onclick="checkAnswer(this, false)">Sugar</button>
+    <!-- Header -->
+    <header class="bg-black text-white p-4 shadow-lg fixed w-full z-50">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <h1 class="text-3xl font-bold mb-2 md:mb-0">
+                <a href="#hero" class="hover:text-red-400 transition duration-300">🚭 Vaping: The Hidden Dangers</a>
+            </h1>
+            <nav>
+                <ul class="flex flex-wrap justify-center space-x-4 md:space-x-6 text-lg">
+                    <li><a href="#hero" class="hover:text-red-400 transition duration-300">Home</a></li>
+                    <li><a href="#what-is-vaping" class="hover:text-red-400 transition duration-300">What is Vaping?</a></li>
+                    <li><a href="#dangers" class="hover:text-red-400 transition duration-300">Dangers</a></li>
+                    <li><a href="#sa-context" class="hover:text-red-400 transition duration-300">SA Context</a></li>
+                    <li><a href="#quiz-section" class="hover:text-red-400 transition duration-300">Quiz</a></li>
+                    <li><a href="#get-help" class="hover:text-red-400 transition duration-300">Get Help</a></li>
+                </ul>
+            </nav>
         </div>
+    </header>
 
-        <div class="quiz-question">
-          <p><strong>2. Can vaping cause lung damage?</strong></p>
-          <button onclick="checkAnswer(this, true)">Yes ✅</button>
-          <button onclick="checkAnswer(this, false)">No</button>
+    <main class="pt-20"> <!-- Padding top to account for fixed header -->
+        <!-- Hero Section -->
+        <section id="hero" class="relative bg-gray-900 text-white py-20 md:py-32 flex items-center justify-center min-h-screen-75 overflow-hidden shadow-xl">
+            <div class="container mx-auto text-center px-4 z-10">
+                <h2 class="text-4xl md:text-6xl font-extrabold mb-4 hero-text-fade-in">
+                    Unmasking the Vapour: The Truth About Vaping
+                </h2>
+                <p class="text-xl md:text-2xl mb-8 hero-text-fade-in" style="animation-delay: 0.5s;">
+                    A Grade 9 Project for a Healthier South Africa
+                </p>
+                <a href="#what-is-vaping" class="inline-block bg-red-600 text-white hover:bg-red-700 px-8 py-4 rounded-full text-lg font-semibold shadow-lg transition duration-300 transform hover:scale-105 btn-pulse hero-text-fade-in" style="animation-delay: 1s;">
+                    Learn More
+                </a>
+            </div>
+            <!-- Simple animated background elements (SVG or pseudo-elements) -->
+            <div class="absolute inset-0 z-0 opacity-20">
+                <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+                    <circle cx="20" cy="20" r="15" fill="rgba(255,255,255,0.1)" class="animate-float-1"></circle>
+                    <circle cx="80" cy="50" r="20" fill="rgba(255,255,255,0.1)" class="animate-float-2"></circle>
+                    <circle cx="40" cy="90" r="10" fill="rgba(255,255,255,0.1)" class="animate-float-3"></circle>
+                    <style>
+                        @keyframes float1 { 0% { transform: translate(0, 0); } 50% { transform: translate(10px, 20px); } 100% { transform: translate(0, 0); }}
+                        @keyframes float2 { 0% { transform: translate(0, 0); } 50% { transform: translate(-15px, -10px); } 100% { transform: translate(0, 0); }}
+                        @keyframes float3 { 0% { transform: translate(0, 0); } 50% { transform: translate(5px, -25px); } 100% { transform: translate(0, 0); }}
+                        .animate-float-1 { animation: float1 10s infinite ease-in-out; }
+                        .animate-float-2 { animation: float2 12s infinite ease-in-out; }
+                        .animate-float-3 { animation: float3 8s infinite ease-in-out; }
+                    </style>
+                </svg>
+            </div>
+        </section>
+
+        <!-- What is Vaping? Section -->
+        <section id="what-is-vaping" class="py-16 md:py-24 bg-white section-hidden">
+            <div class="container mx-auto px-4">
+                <h3 class="text-4xl font-bold text-center mb-12 text-red-600">What is Vaping?</h3>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <p class="text-lg mb-6">
+                            Vaping involves using an electronic device, often called an e-cigarette or vape, to heat a liquid (e-liquid or vape juice) until it turns into an aerosol (often mistakenly called vapour) that is then inhaled. These devices come in many shapes and sizes, from sleek pens to larger "mods," and are often marketed with appealing designs and flavours.
+                        </p>
+                        <p class="text-lg mb-6">
+                            It's crucial to understand that what you inhale from a vape is <strong class="text-red-600">NOT just harmless water vapour</strong>. E-liquids typically contain a mix of chemicals, including:
+                        </p>
+                        <ul class="list-disc list-inside text-lg space-y-2 ml-4">
+                            <li><strong>Propylene Glycol (PG) & Vegetable Glycerine (VG):</strong> These are the main ingredients that create the aerosol. While generally safe for ingestion, their effects when heated and inhaled deep into the lungs are still being studied and are a cause for concern.</li>
+                            <li><strong>Nicotine:</strong> A highly addictive chemical found naturally in tobacco. Many vapes, even some marketed as "nicotine-free," contain nicotine.</li>
+                            <li><strong>Flavourings:</strong> Thousands of different flavourings are used, from fruit and candy to dessert flavours. Many of these chemicals are safe to eat but not safe to inhale, and can break down into harmful substances when heated.</li>
+                            <li><strong>Other Chemicals:</strong> Vapes can contain other harmful chemicals, heavy metals (like lead, tin, and nickel from the heating coil), and ultrafine particles that can be inhaled deep into the lungs.</li>
+                        </ul>
+                    </div>
+                    <div class="flex justify-center">
+                        <!-- Image removed as requested -->
+                        <div class="w-[500px] h-[350px] bg-gray-200 flex items-center justify-center rounded-lg shadow-xl max-w-full">
+                            <span class="text-gray-500 text-xl">Vaping Device Illustration</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dangers of Vaping Section -->
+        <section id="dangers" class="py-16 md:py-24 bg-gray-100 section-hidden">
+            <div class="container mx-auto px-4">
+                <h3 class="text-4xl font-bold text-center mb-12 text-red-600">The Serious Dangers of Vaping</h3>
+                <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-10">
+                    <!-- Danger Card: Nicotine Addiction -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                        <h4 class="text-2xl font-semibold mb-4 text-red-600">1. Nicotine Addiction & Brain Harm</h4>
+                        <p class="text-lg mb-4">
+                            Nicotine is a highly addictive chemical, and the adolescent brain is especially vulnerable. Your brain continues to develop until around age 25, and nicotine exposure during this critical period can cause lasting negative effects.
+                        </p>
+                        <ul class="list-disc list-inside text-lg space-y-2 ml-4">
+                            <li><strong>Cognitive Impairment:</strong> Harms areas of the brain involved in attention, learning, and memory.</li>
+                            <li><strong>Mood Regulation:</strong> Can negatively impact emotional control and lead to mood swings.</li>
+                            <li><strong>Impulse Control:</strong> Affects your ability to make rational decisions.</li>
+                            <li><strong>"Priming" for Addiction:</strong> Nicotine can make your brain more susceptible to addiction to other substances later in life.</li>
+                            <li><strong>Rapid Addiction:</strong> In South Africa, a study showed that <strong>47% of teen vapers use their device within the first hour of waking</strong>, a strong sign of high nicotine addiction.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Danger Card: Physical Health Risks -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                        <h4 class="text-2xl font-semibold mb-4 text-red-600">2. Severe Physical Health Risks</h4>
+                        <p class="text-lg mb-4">
+                            Despite marketing claims, vaping introduces harmful chemicals into your body, leading to a range of serious physical health problems.
+                        </p>
+                        <ul class="list-disc list-inside text-lg space-y-2 ml-4">
+                            <li><strong>Lung Damage:</strong> Can cause "popcorn lung" (bronchiolitis obliterans), severe inflammation, and acute lung injuries, some of which have been fatal. Vaping affects 358 genes involved in fighting viruses and bacteria, compared to 53 for cigarettes.</li>
+                            <li><strong>Heart Health:</strong> Nicotine speeds up heart rate and raises blood pressure. Chemicals in vape aerosol can damage blood vessels, increasing the risk of heart attacks and strokes.</li>
+                            <li><strong>Weakened Immune System:</strong> Vaping can suppress the lungs' natural defenses, making you more vulnerable to infections like colds, flu, and pneumonia.</li>
+                            <li><strong>Exposure to Toxins:</strong> You inhale formaldehyde, heavy metals (lead, tin, nickel), and ultrafine particles. Flavouring chemicals like diacetyl are linked to serious lung disease. Some chemicals are found in cleaning products, nail polish remover, and weed killer.</li>
+                            <li><strong>Oral Health:</strong> Leads to dry mouth, increased risk of gingivitis and periodontitis (gum disease), and other irreversible damage to your mouth and gums.</li>
+                            <li><strong>Skin Issues:</strong> Propylene glycol can dehydrate your skin, and nicotine restricts blood flow, leading to dryness and premature aging/sagging.</li>
+                            <li><strong>Explosions:</strong> Though rare, faulty vape batteries have been known to explode, causing severe burns and injuries.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Danger Card: Mental Health Risks -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                        <h4 class="text-2xl font-semibold mb-4 text-red-600">3. Impact on Mental Health</h4>
+                        <p class="text-lg mb-4">
+                            The link between vaping and mental health is significant and concerning, especially for young people.
+                        </p>
+                        <ul class="list-disc list-inside text-lg space-y-2 ml-4">
+                            <li><strong>Increased Anxiety & Depression:</strong> Vaping can worsen symptoms of pre-existing mental health conditions and increase the incidence of new cases of depression and anxiety.</li>
+                            <li><strong>Coping Mechanism:</strong> Many teens start vaping to cope with stress and anxiety, but it often exacerbates these issues rather than resolving them.</li>
+                            <li><strong>Suicidal Thoughts:</strong> Studies show a higher incidence of depression, suicidal thoughts, and suicide attempts in teenagers who vape compared to those who don't.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Danger Card: Gateway to Smoking -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                        <h4 class="text-2xl font-semibold mb-4 text-red-600">4. Gateway to Traditional Smoking</h4>
+                        <p class="text-lg mb-4">
+                            Vaping is often marketed as a safer alternative or a way to quit smoking, but for young people, it often acts as a gateway to traditional cigarette use.
+                        </p>
+                        <ul class="list-disc list-inside text-lg space-y-2 ml-4">
+                            <li>Global studies show that teens who vape are significantly more likely to start smoking conventional cigarettes within months.</li>
+                            <li>In South Africa, <strong>one in five (19%) users with no previous smoking history started smoking conventional cigarettes only after using e-cigarettes.</strong></li>
+                            <li>The appealing flavours and sleek designs of vapes are specifically designed to attract young consumers, creating a new generation of nicotine-dependent individuals.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Danger Card: Second-hand and Third-hand Exposure -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 lg:col-span-2">
+                        <h4 class="text-2xl font-semibold mb-4 text-red-600">5. Second-hand and Third-hand Exposure</h4>
+                        <p class="text-lg mb-4">
+                            Even if you don't vape, you can still be exposed to harmful substances from others' vaping.
+                        </p>
+                        <ul class="list-disc list-inside text-lg space-y-2 ml-4">
+                            <li><strong>Second-hand Aerosol:</strong> The exhaled "vape cloud" contains nicotine and tiny harmful particles that can affect people nearby, especially children, pregnant women, and those with respiratory conditions like asthma.</li>
+                            <li><strong>Third-hand Exposure:</strong> Residual nicotine and other chemicals from vape aerosol can settle on indoor surfaces (furniture, clothes, walls) long after the "cloud" has cleared. This can lead to exposure through skin contact, inhalation, or ingestion, particularly risky for young children.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- South African Context Section -->
+        <section id="sa-context" class="py-16 md:py-24 bg-white section-hidden">
+            <div class="container mx-auto px-4">
+                <h3 class="text-4xl font-bold text-center mb-12 text-red-600">Vaping in South Africa: What You Need to Know</h3>
+                <div class="grid md:grid-cols-2 gap-12 items-start">
+                    <div>
+                        <h4 class="text-3xl font-semibold mb-6 text-red-600">Concerning Statistics Among SA Youth</h4>
+                        <p class="text-lg mb-4">
+                            Vaping is a growing crisis among South African teenagers, with alarming rates of use and addiction:
+                        </p>
+                        <ul class="list-disc list-inside text-lg space-y-3 ml-4">
+                            <li>A 2023 study across 52 high schools found that <strong>17.82% of learners (Grades 8-12) currently use vaping products</strong>, and <strong>36.71% have tried vaping</strong>.</li>
+                            <li>The prevalence increases with age: <strong>9% of Grade 8 learners vape, rising to an average of 30% among Matric learners</strong> (some schools seeing rates as high as 46%).</li>
+                            <li><strong>38% of students vape daily</strong>, with an additional 50% vaping at least four days a week.</li>
+                            <li><strong>12% of learners reported being unable to get through the school day without vaping</strong>, highlighting severe dependence.</li>
+                            <li>Over 50% of students cited <strong>social influences (friends, peer pressure)</strong> as reasons for starting, while nearly 20% began vaping to cope with stress and anxiety.</li>
+                            <li>Vape shops are often located near tertiary education institutions, making them easily accessible.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-3xl font-semibold mb-6 text-red-600">South African Laws & Proposed Regulations</h4>
+                        <p class="text-lg mb-4">
+                            Currently, South Africa's vaping regulation is largely governed by the outdated Tobacco Products Control Act (2008), which doesn't fully address e-cigarettes. However, there are ongoing efforts to introduce stricter laws through the <strong>Tobacco Products and Electronic Delivery Systems Control Bill</strong>.
+                        </p>
+                        <p class="text-lg mb-4 italic text-gray-700">
+                            While this Bill is still being finalised, some aspects, like age restrictions, are already being enforced.
+                        </p>
+                        <ul class="list-disc list-inside text-lg space-y-3 ml-4">
+                            <li><strong>Age Restrictions:</strong> The sale of e-cigarettes and vaping devices to individuals under the age of 18 is strictly prohibited.</li>
+                            <li><strong>Public Use Bans:</strong> Smoking and vaping are banned in all workplaces, indoor public spaces, and public transport.</li>
+                            <li><strong>Proposed Restrictions (from the Bill):</strong>
+                                <ul class="list-circle list-inside ml-6 text-base space-y-1">
+                                    <li>Bans on certain e-cigarette products, including flavoured and disposable vapes.</li>
+                                    <li>Increased taxes on vaping products to make them less affordable.</li>
+                                    <li>Strict advertising and promotion bans (e.g., no sponsorship of events, no social media marketing).</li>
+                                    <li>Mandatory explicit health warnings and nicotine content information on packaging.</li>
+                                    <li>Products may not be displayed at point of sale; retailers can only make them available upon request (and only to non-minors).</li>
+                                </ul>
+                            </li>
+                            <li><strong>Penalties for Non-Compliance (Proposed):</strong> The Bill outlines significant financial penalties, potential imprisonment (up to 3 months for minor offenses, up to 20 years for severe offenses), business closure, and product confiscation for individuals and businesses violating the regulations.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz-section" class="py-16 md:py-24 bg-gray-100 section-hidden">
+            <div class="container mx-auto px-4">
+                <h3 class="text-4xl font-bold text-center mb-12 text-red-600">Test Your Knowledge: Vaping Quiz!</h3>
+                <div id="quiz-container" class="bg-white p-8 rounded-xl shadow-lg max-w-2xl mx-auto">
+                    <div id="quiz-question" class="text-2xl font-semibold mb-6 text-center"></div>
+                    <div id="quiz-options" class="space-y-4 mb-8">
+                        <!-- Options will be loaded here by JavaScript -->
+                    </div>
+                    <div class="flex justify-center space-x-4">
+                        <button id="submit-answer" class="bg-red-600 text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-red-700 transition duration-300 shadow-md">Submit Answer</button>
+                        <button id="next-question" class="bg-black text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-gray-800 transition duration-300 shadow-md" style="display:none;">Next Question</button>
+                    </div>
+                    <div id="quiz-feedback" class="text-center mt-6 text-lg font-medium"></div>
+                    <div id="quiz-result" class="text-center mt-8 text-3xl font-bold text-red-600" style="display:none;"></div>
+                    <button id="retake-quiz" class="bg-red-600 text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-red-700 transition duration-300 shadow-md mx-auto block mt-6" style="display:none;">Retake Quiz</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Get Help / Resources Section -->
+        <section id="get-help" class="py-16 md:py-24 bg-black text-white section-hidden">
+            <div class="container mx-auto px-4 text-center">
+                <h3 class="text-4xl font-bold mb-12">Need Help or More Information?</h3>
+                <p class="text-xl mb-8">
+                    If you or someone you know is struggling with vaping addiction, or if you simply want to learn more, there are resources available in South Africa to help. You are not alone!
+                </p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white text-black p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                        <h4 class="text-2xl font-semibold mb-3">National Council Against Smoking (NCAS)</h4>
+                        <p class="text-lg mb-2"><strong>Quit Line:</strong> 011 720 3145</p>
+                        <p class="text-lg mb-2"><strong>Email:</strong> <a href="mailto:quit@iafrica.com" class="text-red-600 hover:underline">quit@iafrica.com</a></p>
+                        <p class="text-lg">Offers telephonic advice and a personal guide to quitting.</p>
+                    </div>
+                    <div class="bg-white text-black p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                        <h4 class="text-2xl font-semibold mb-3">CANSA eKickButt Programme</h4>
+                        <p class="text-lg mb-2"><strong>Website:</strong> <a href="https://www.ekickbutt.co.za" target="_blank" class="text-red-600 hover:underline">www.ekickbutt.co.za</a></p>
+                        <p class="text-lg">Free online smoking and vaping cessation programme with tools and mentorship.</p>
+                    </div>
+                    <div class="bg-white text-black p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                        <h4 class="text-2xl font-semibold mb-3">Heart and Stroke Foundation SA</h4>
+                        <p class="text-lg mb-2"><strong>Health Line:</strong> 0860 1 HEART (0860 1 4278)</p>
+                        <p class="text-lg">Provides general health information and support related to cardiovascular health.</p>
+                    </div>
+                    <div class="bg-white text-black p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 lg:col-span-3">
+                        <h4 class="text-2xl font-semibold mb-3">Speak to a Trusted Adult</h4>
+                        <p class="text-lg">
+                            If you're worried about yourself or a friend, the best first step is to talk to a trusted adult – a parent, guardian, teacher, school counsellor, or family doctor. They can provide support and help you find professional assistance if needed.
+                        </p>
+                    </div>
+                </div>
+                <a href="#quiz-section" class="inline-block bg-red-600 text-white hover:bg-red-700 px-8 py-4 rounded-full text-lg font-semibold shadow-lg transition duration-300 transform hover:scale-105 mt-12 btn-pulse">
+                    Revisit the Quiz
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white p-6 text-center text-sm">
+        <div class="container mx-auto">
+            <p>&copy; 2025 Ruben de Lange, Bellville High School. All rights reserved.</p>
+            <p class="mt-2">Disclaimer: This website provides general information and is not a substitute for professional medical advice.</p>
         </div>
+    </footer>
 
-        <div class="quiz-question">
-          <p><strong>3. What age is the brain fully developed?</strong></p>
-          <button onclick="checkAnswer(this, false)">18</button>
-          <button onclick="checkAnswer(this, true)">25 ✅</button>
-          <button onclick="checkAnswer(this, false)">13</button>
-        </div>
+    <script>
+        // JavaScript for section animations (fade-in on scroll)
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section.section-hidden');
 
-        <p id="quiz-result"></p>
-      </div>
-    </section>
-  </main>
+            const revealSection = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('section-visible');
+                        observer.unobserve(entry.target); // Stop observing once visible
+                    }
+                });
+            };
 
-  <footer>
-    <div class="container">
-      <p>🚭 Say NO to Vaping | Grade 9 Project by [Your Name]</p>
-    </div>
-  </footer>
+            const sectionObserver = new IntersectionObserver(revealSection, {
+                root: null, // viewport
+                threshold: 0.15 // 15% of the section must be visible
+            });
 
-  <script src="script.js"></script>
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+            // Trigger hero animation
+            document.querySelector('.hero-text-fade-in').classList.add('hero-text-fade-in');
+            document.querySelectorAll('.hero-text-fade-in').forEach((el, index) => {
+                el.style.animationDelay = `${0.5 * index}s`;
+            });
+
+
+            // Quiz Logic
+            const quizQuestions = [
+                {
+                    question: "What percentage of South African teen vapers (Grades 8-12) reported currently using vaping products in a 2023 study?",
+                    options: ["5%", "10%", "17.82%", "30%"],
+                    answer: "17.82%"
+                },
+                {
+                    question: "Which of these is NOT just harmless water vapour in e-liquids?",
+                    options: ["Propylene Glycol", "Vegetable Glycerine", "Nicotine", "All of the above"],
+                    answer: "All of the above"
+                },
+                {
+                    question: "Until what age does the human brain continue to develop, making it vulnerable to nicotine's effects?",
+                    options: ["18", "21", "25", "30"],
+                    answer: "25"
+                },
+                {
+                    question: "What is 'popcorn lung' (bronchiolitis obliterans) associated with in vapers?",
+                    options: ["Heart disease", "Lung damage", "Skin issues", "Brain damage"],
+                    answer: "Lung damage"
+                },
+                {
+                    question: "According to South African studies, what percentage of teen vapers use their device within the first hour of waking, indicating high addiction?",
+                    options: ["10%", "25%", "47%", "75%"],
+                    answer: "47%"
+                },
+                {
+                    question: "Which of these is a proposed restriction in the South African Tobacco Products and Electronic Delivery Systems Control Bill?",
+                    options: ["Unlimited advertising for vapes", "Sale of vapes to anyone regardless of age", "Bans on certain flavoured and disposable vapes", "No health warnings on vape packaging"],
+                    answer: "Bans on certain flavoured and disposable vapes"
+                },
+                {
+                    question: "Vaping can increase the risk of which mental health issues?",
+                    options: ["Happiness and contentment", "Improved focus", "Depression and anxiety", "Increased motivation"],
+                    answer: "Depression and anxiety"
+                },
+                {
+                    question: "What is 'third-hand exposure' in relation to vaping?",
+                    options: ["Inhaling aerosol directly from a vaper", "Contact with residual chemicals on surfaces after vaping", "Hearing about vaping from a friend", "Watching someone vape on social media"],
+                    answer: "Contact with residual chemicals on surfaces after vaping"
+                }
+            ];
+
+            let currentQuestionIndex = 0;
+            let score = 0;
+            let selectedOption = null;
+
+            const quizQuestionEl = document.getElementById('quiz-question');
+            const quizOptionsEl = document.getElementById('quiz-options');
+            const submitBtn = document.getElementById('submit-answer');
+            const nextBtn = document.getElementById('next-question');
+            const feedbackEl = document.getElementById('quiz-feedback');
+            const resultEl = document.getElementById('quiz-result');
+            const retakeBtn = document.getElementById('retake-quiz');
+
+            function loadQuestion() {
+                if (currentQuestionIndex < quizQuestions.length) {
+                    const q = quizQuestions[currentQuestionIndex];
+                    quizQuestionEl.textContent = `${currentQuestionIndex + 1}. ${q.question}`;
+                    quizOptionsEl.innerHTML = '';
+                    selectedOption = null;
+                    feedbackEl.textContent = '';
+                    submitBtn.style.display = 'block';
+                    nextBtn.style.display = 'none';
+                    resultEl.style.display = 'none';
+                    retakeBtn.style.display = 'none';
+
+                    q.options.forEach(option => {
+                        const optionDiv = document.createElement('div');
+                        optionDiv.className = 'quiz-option p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 transition duration-200';
+                        optionDiv.textContent = option;
+                        optionDiv.addEventListener('click', () => selectOption(optionDiv, option));
+                        quizOptionsEl.appendChild(optionDiv);
+                    });
+                    resetOptionStyles();
+                } else {
+                    showResults();
+                }
+            }
+
+            function selectOption(element, optionValue) {
+                resetOptionStyles();
+                selectedOption = optionValue;
+                element.classList.add('selected');
+            }
+
+            function resetOptionStyles() {
+                document.querySelectorAll('.quiz-option').forEach(opt => {
+                    opt.classList.remove('selected', 'correct', 'incorrect');
+                });
+            }
+
+            function checkAnswer() {
+                if (selectedOption === null) {
+                    feedbackEl.textContent = "Please select an answer!";
+                    feedbackEl.className = 'text-center mt-6 text-lg font-medium text-red-500';
+                    return;
+                }
+
+                const q = quizQuestions[currentQuestionIndex];
+                const optionsDivs = quizOptionsEl.querySelectorAll('.quiz-option');
+
+                optionsDivs.forEach(optDiv => {
+                    if (optDiv.textContent === q.answer) {
+                        optDiv.classList.add('correct');
+                    } else if (optDiv.textContent === selectedOption) {
+                        optDiv.classList.add('incorrect');
+                    }
+                    optDiv.style.pointerEvents = 'none'; // Disable clicks after answering
+                });
+
+                if (selectedOption === q.answer) {
+                    score++;
+                    feedbackEl.textContent = "Correct! Well done.";
+                    feedbackEl.className = 'text-center mt-6 text-lg font-medium text-green-700';
+                } else {
+                    feedbackEl.textContent = `Incorrect. The correct answer was: ${q.answer}`;
+                    feedbackEl.className = 'text-center mt-6 text-lg font-medium text-red-700';
+                }
+
+                submitBtn.style.display = 'none';
+                nextBtn.style.display = 'block';
+            }
+
+            function showResults() {
+                quizQuestionEl.textContent = "Quiz Completed!";
+                quizOptionsEl.innerHTML = '';
+                feedbackEl.textContent = '';
+                submitBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+                resultEl.textContent = `You scored ${score} out of ${quizQuestions.length}!`;
+                resultEl.style.display = 'block';
+                retakeBtn.style.display = 'block';
+            }
+
+            function retakeQuiz() {
+                currentQuestionIndex = 0;
+                score = 0;
+                loadQuestion();
+            }
+
+            submitBtn.addEventListener('click', checkAnswer);
+            nextBtn.addEventListener('click', () => {
+                currentQuestionIndex++;
+                loadQuestion();
+            });
+            retakeBtn.addEventListener('click', retakeQuiz);
+
+            loadQuestion(); // Load the first question on page load
+
+
+            // Scroll-to-top button logic
+            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    scrollToTopBtn.style.display = "block";
+                } else {
+                    scrollToTopBtn.style.display = "none";
+                }
+            };
+
+            // When the user clicks on the button, scroll to the top of the document
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
