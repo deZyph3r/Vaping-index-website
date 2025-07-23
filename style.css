@@ -1,73 +1,133 @@
+/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Segoe UI', sans-serif;
   line-height: 1.6;
-  background: #f9f9f9;
-  color: #333;
-  padding: 20px;
+  background-color: #f4f4f4;
+  color: #222;
 }
 
+/* Containers */
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+/* Header */
 header {
-  text-align: center;
-  padding: 2em 1em;
-  background: #008080;
+  background: linear-gradient(to right, #74121d, #9b1c31);
   color: white;
+  padding: 40px 0;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
 }
 
 header h1 {
+  font-size: 2.8em;
   margin-bottom: 10px;
-  font-size: 2em;
 }
 
-.cta-buttons {
+.tagline {
+  font-size: 1.2em;
+  opacity: 0.9;
+}
+
+nav ul {
   margin-top: 20px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
-.btn {
-  display: inline-block;
-  padding: 10px 20px;
-  margin: 5px;
-  background: #fff;
-  color: #008080;
-  border: 2px solid #fff;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.btn:hover {
-  background: #006666;
+nav a {
   color: white;
-  border-color: #006666;
+  text-decoration: none;
+  padding: 8px 15px;
+  border: 2px solid white;
+  border-radius: 5px;
+  transition: 0.3s ease;
 }
 
-main {
-  padding: 2em 0;
+nav a:hover {
+  background-color: white;
+  color: #74121d;
 }
 
-section {
-  margin-bottom: 2.5em;
+/* Section Styling */
+.section {
+  padding: 60px 0;
 }
 
-section h2 {
-  color: #008080;
-  margin-bottom: 1em;
+.section h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #74121d;
 }
 
-ul, ol {
-  margin-left: 1.5em;
-  margin-bottom: 1em;
+.section p,
+.section ul {
+  font-size: 1.1em;
+  margin-bottom: 20px;
 }
 
+.section ul {
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+/* Alternate Backgrounds */
+.bg-light {
+  background-color: #fff5f7;
+}
+
+.bg-dark {
+  background-color: #222;
+  color: #fff;
+}
+
+.bg-dark h2 {
+  color: #ff6b81;
+}
+
+.bg-dark a {
+  color: #ffd6d6;
+}
+
+/* Footer */
 footer {
+  background: #74121d;
+  color: white;
   text-align: center;
-  padding: 1em;
-  background: #eaeaea;
-  margin-top: 2em;
+  padding: 25px 10px;
   font-size: 0.9em;
+  margin-top: 40px;
+  border-top: 3px solid #520a12;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  header h1 {
+    font-size: 2em;
+  }
+
+  nav ul {
+    flex-direction: column;
+  }
+
+  nav a {
+    margin-bottom: 10px;
+  }
 }
